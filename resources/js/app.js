@@ -8,9 +8,15 @@ require('./bootstrap');
 
 import Vue from 'vue';
 import moment from 'moment';
-//vue router
 import VueRouter from 'vue-router';
-
+import VueProgressBar from 'vue-progressbar';
+//progress bar
+Vue.use(VueProgressBar, {
+    color: 'rgb(143, 255, 199)',
+    failedColor: 'red',
+    height: '3px'
+});
+//vue router
 Vue.use(VueRouter);
 const routes = [
     {path: '/dashboard', component: require('./components/Dashboard.vue').default},
