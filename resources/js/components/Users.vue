@@ -59,6 +59,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <form @submit.prevent="createUser" >
                     <div class="modal-body">
                         <div class="form-group">
                             <input type="text" v-model="form.name" name="name"
@@ -93,8 +94,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -114,6 +116,11 @@
                     bio: '',
                     photo: '',
                 })
+            }
+        },
+        methods:{
+            createUser(){
+                this.form.post('api/user');
             }
         },
         mounted() {
