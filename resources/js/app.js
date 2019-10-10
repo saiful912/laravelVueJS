@@ -10,6 +10,17 @@ import Vue from 'vue';
 import moment from 'moment';
 import VueRouter from 'vue-router';
 import VueProgressBar from 'vue-progressbar';
+//sweet alert
+import swal from 'sweetalert2';
+
+window.swal = swal;
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+window.toast = toast;
 //progress bar
 Vue.use(VueProgressBar, {
     color: 'rgb(143, 255, 199)',
@@ -24,19 +35,20 @@ const routes = [
     {path: '/profile', component: require('./components/Profile.vue').default}
 ];
 const router = new VueRouter({
-    mode:'history',
+    mode: 'history',
     routes // short for `routes: routes`
 });
 //filter
-Vue.filter('upText',function (text) {
-    return text.charAt(0).toUpperCase()+text.slice(1)
+Vue.filter('upText', function (text) {
+    return text.charAt(0).toUpperCase() + text.slice(1)
 });
 //moment js
-Vue.filter('myDate',function (created) {
+Vue.filter('myDate', function (created) {
     return moment(created).format('MMM Do YYYY');
 });
 //V-form
 import {Form, HasError, AlertError} from 'vform'
+
 window.Form = Form;
 Vue.component(HasError.name, HasError);
 Vue.component(AlertError.name, AlertError);
