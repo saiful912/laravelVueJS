@@ -150,7 +150,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </footer>
 </div>
 <!-- ./wrapper -->
-
 <!-- REQUIRED SCRIPTS -->
 <script src="{{mix('js/app.js')}}"></script>
 </body>
