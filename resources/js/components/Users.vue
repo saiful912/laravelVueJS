@@ -6,7 +6,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Users Table</h3>
                         <div class="card-tools">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#addNew">
+                            <button class="btn btn-success" @click="newModal()">
                                 Add New
                                 <i class="fas fa-user-plus fa-fw"></i>
                             </button>
@@ -33,7 +33,7 @@
                                 <td>{{user.type|upText}}</td>
                                 <td>{{user.created_at|myDate}}</td>
                                 <td>
-                                    <button>
+                                    <button @click="editModal(user)">
                                         <i class="fas fa-edit purple"></i>
                                     </button>
                                     /
@@ -127,7 +127,16 @@
             }
         },
         methods: {
-            deleteUser(id){
+            editModal(user) {
+                this.form.reset();
+                $('#addNew').modal('show');
+                this.form.fill(user);
+            },
+            newModal() {
+                this.form.reset();
+                $('#addNew').modal('show');
+            },
+            deleteUser(id) {
                 swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -139,16 +148,16 @@
                 }).then((result) => {
 
                     if (result.value) {
-                    this.form.delete('api/user/'+id).then(()=>{
+                        this.form.delete('api/user/' + id).then(() => {
                             swal.fire(
                                 'Deleted!',
                                 'Your file has been deleted.',
                                 'success'
                             )
-                        Fire.$emit('AfterCreate');
-                        }).catch(()=>{
+                            Fire.$emit('AfterCreate');
+                        }).catch(() => {
 
-                    })
+                        })
                     }
                 })
             },
