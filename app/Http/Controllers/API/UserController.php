@@ -62,7 +62,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required|string|max:16',
+            'email' => 'required|string|email|unique:users,email,' . $user->id,
+            'password' => 'sometimes|min:6',
+        ]);
+        $user->update($request->all());
+        return ['message' => 'update the user info'];
     }
 
     /**
